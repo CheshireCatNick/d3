@@ -51,7 +51,7 @@ setInterval(() => {
   // select all circle and join with data array
   update = svg.selectAll('circle').data(data);
   // remove circles in the "exit" set, which didn't match any data
-  update.exit().remove();
+  update.exit().transition().attr('r', 0).remove();
 
 }, 1000);
 
