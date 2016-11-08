@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.3.0/d3.js"></script>
+</head>
+<body>
+<!-- <svg height="500" width="800">
+  This is a practice for real-time data display with Join concept. 
+  For more info, see https://bost.ocks.org/mike/join/
+-->
+</svg>
+<script>
+const svgH = 600, svgW = 1600;
+const svg = d3.select('body').append('svg')
+                              .attr('height', svgH)
+                              .attr('width', svgW);
+/*
+const data = [{ cx: 10, cy: 10, r: 20 },
+{ cx: 40, cy: 40, r: 20 },
+{ cx: 70, cy: 70, r: 20 },
+{ cx: 90, cy: 90, r: 20 },
+{ cx: 100, cy: 100, r: 20 }];
+*/
+// init data array
+let data = [];
+for (let h = 0; h < svgH; h += 30)
+  for (let w = 0; w < svgW; w += 30) {
+    let c = {
+      cx: w,
+      cy: h,
+    };
+    data.push(c);
+  }
+// select all circles, which is empty set
+const circles = svg.selectAll('circle');
+// join the circle set with data, the "update" set is returned
+let update = circles.data(data);
+// for all circles in "enter" set, append a circle 
+update.enter().append('circle')
+              .attr('cx', (d) => { return d.cx; })
+              .attr('cy', (d) => { return d.cy; })
+              .attr('r', 10)
+              .attr('fill', 'green');
+
+
+setInterval(() => {
+  data.pop();
+  console.log(data.length);
+
+  // select all circle and join with data array
+  update = svg.selectAll('circle').data(data);
+  // remove circles in the "exit" set, which didn't match any data
+  update.exit().remove();
+
+}, 1000);
+
+</script>
+</body>
+</html>
