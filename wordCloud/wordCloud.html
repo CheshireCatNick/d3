@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.3.0/d3.js"></script>
+<script src="d3-wordcloud/lib/d3/d3.js"></script>
+<script src="d3-wordcloud/lib/d3/d3.layout.cloud.js"></script>
+<script src="d3-wordcloud/d3.wordcloud.js"></script>
+</head>
+<body>
+<!-- 
+  This is a practice for displaying csv data to polyline.
+-->
+<div id="display"></div>
+</body>
+<script>
+
+d3.csv('termFreq.csv', (d) => {
+  d3.wordcloud()
+        .size([800, 400])
+        .selector('#display')
+        .words(d)
+        .start();
+});
+
+</script>
+</body>
+</html>
