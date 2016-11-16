@@ -1,7 +1,7 @@
-function main() {
+function linetest() {
   // svg settings
   const svgH = 600, svgW = 800;
-  const svg = d3.select('body').append('svg')
+  const svg = d3.select('.content').append('svg')
                                 .attr('height', svgH)
                                 .attr('width', svgW);
   // well, it's a secret                              
